@@ -1,0 +1,126 @@
+@baseUrl = http://localhost:5000
+@token = 
+
+### 1. Получить список жанров (Справочник)
+GET {{baseUrl}}/api/genres
+Accept: application/json
+
+### 2. Получить список фильмов (Пагинация: страница 1, размер 6)
+GET {{baseUrl}}/api/movies?page=1&pageSize=6
+Accept: application/json
+
+### 3. Фильтрация: жанр = 3 (Фантастика), рейтинг от = 8.0, год = 2014
+GET {{baseUrl}}/api/movies?genreId=3&minRating=8.0&year=2014
+Accept: application/json
+
+### 4. Сортировка по рейтингу (по убыванию)
+GET {{baseUrl}}/api/movies?sortBy=rating&sortOrder=desc
+Accept: application/json
+
+### 5. Сортировка по году (по возрастанию)
+GET {{baseUrl}}/api/movies?sortBy=year&sortOrder=asc
+Accept: application/json
+
+### 6. Получить фильм по ID (200 OK)
+GET {{baseUrl}}/api/movies/1
+Accept: application/json
+
+### 7. Получить несуществующий фильм (404 Not Found)
+GET {{baseUrl}}/api/movies/9999
+Accept: application/json
+
+### 8. Регистрация нового пользователя (201 Created)
+# @name register
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "ibragimov",
+  "password": "Password123!"
+}
+
+### 9. Вход в систему тестовым пользователем (200 OK)
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "Admin123!"
+}
+
+### Скопируйте token из ответа login и вставьте в переменную @token наверху файла
+@authToken = {{login.response.body.token}}
+
+### 10. Проверка профиля текущего пользователя (200 OK)
+GET {{baseUrl}}/api/auth/me
+Authorization: Bearer {{authToken}}
+Accept: application/json
+
+### 11. Попытка создать фильм БЕЗ авторизации (401 Unauthorized)
+POST {{baseUrl}}/api/movies
+Content-Type: application/json
+
+{
+  "title": "Без авторизации",
+  "year": 2024,
+  "duration": 120,
+  "rating": 7.5,
+  "genreId": 1
+}
+
+### 12. Создание фильма с валидацией (400 Bad Request с ProblemDetails)
+POST {{baseUrl}}/api/movies
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "title": "",
+  "year": 1800,
+  "duration": -5,
+  "rating": 15.0,
+  "genreId": 999
+}
+
+### 13. Успешное создание фильма (201 Created)
+# @name createMovie
+POST {{baseUrl}}/api/movies
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "title": "Дюна: Часть вторая",
+  "year": 2024,
+  "duration": 166,
+  "rating": 8.6,
+  "genreId": 3
+}
+
+### 14. Редактирование фильма автором (204 No Content)
+PUT {{baseUrl}}/api/movies/1
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "title": "Интерстеллар (Обновлено)",
+  "year": 2014,
+  "duration": 169,
+  "rating": 8.9,
+  "genreId": 3
+}
+
+### 15. Загрузка постера к фильму автором (jpg/png/webp, до 5 МБ)
+POST {{baseUrl}}/api/movies/1/poster
+Authorization: Bearer {{authToken}}
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="poster.png"
+Content-Type: image/png
+
+< C:/Users/ibrag/.gemini/antigravity/scratch/movie-catalog/test_poster.png
+--WebAppBoundary--
+
+### 16. Удаление фильма автором (204 No Content)
+DELETE {{baseUrl}}/api/movies/5
+Authorization: Bearer {{authToken}}
