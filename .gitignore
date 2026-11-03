@@ -1,0 +1,32 @@
+## .NET & Build
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## SQLite Database
+*.db
+*.db-shm
+*.db-wal
+app.db
+movies.db
+
+## Node & Angular
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+## Uploaded Files
+server/wwwroot/uploads/*
+!server/wwwroot/uploads/.gitkeep
+
+## OS & Editors
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
