@@ -80,6 +80,7 @@ public static class MovieEndpoints
                     m.UserId,
                     m.User.Username,
                     m.PosterUrl,
+                    m.WatchUrl,
                     m.CreatedAt
                 ))
                 .ToListAsync();
@@ -113,6 +114,7 @@ public static class MovieEndpoints
                 movie.UserId,
                 movie.User.Username,
                 movie.PosterUrl,
+                movie.WatchUrl,
                 movie.CreatedAt
             ));
         })
@@ -168,6 +170,8 @@ public static class MovieEndpoints
                 Duration = dto.Duration,
                 Rating = Math.Round(dto.Rating, 1),
                 GenreId = dto.GenreId,
+                PosterUrl = dto.PosterUrl,
+                WatchUrl = string.IsNullOrWhiteSpace(dto.WatchUrl) ? null : dto.WatchUrl.Trim(),
                 UserId = userId,
                 CreatedAt = DateTime.UtcNow
             };
@@ -190,6 +194,7 @@ public static class MovieEndpoints
                 movie.UserId,
                 movie.User.Username,
                 movie.PosterUrl,
+                movie.WatchUrl,
                 movie.CreatedAt
             );
 
@@ -253,6 +258,8 @@ public static class MovieEndpoints
             movie.Duration = dto.Duration;
             movie.Rating = Math.Round(dto.Rating, 1);
             movie.GenreId = dto.GenreId;
+            if (dto.PosterUrl != null) movie.PosterUrl = dto.PosterUrl;
+            movie.WatchUrl = string.IsNullOrWhiteSpace(dto.WatchUrl) ? null : dto.WatchUrl.Trim();
 
             await db.SaveChangesAsync();
 

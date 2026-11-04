@@ -40,6 +40,18 @@ import { environment } from '../../../environments/environment';
         <div class="card-actions">
           <a [routerLink]="['/movies', movie().id]" class="btn btn-secondary btn-sm">Подробнее</a>
 
+          @if (movie().watchUrl) {
+            <a
+              [href]="movie().watchUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-watch btn-sm"
+              title="Смотреть фильм онлайн"
+            >
+              ▶ Смотреть
+            </a>
+          }
+
           @if (isAuthor()) {
             <a [routerLink]="['/movies', movie().id, 'edit']" class="btn btn-primary btn-sm">Изменить</a>
             <button (click)="onDelete()" class="btn btn-danger btn-sm" title="Удалить">✕</button>
@@ -49,6 +61,16 @@ import { environment } from '../../../environments/environment';
     </div>
   `,
   styles: [`
+    .btn-watch {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff !important;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+    }
+    .btn-watch:hover {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      transform: translateY(-1px);
+    }
     .movie-card {
       background-color: var(--bg-card);
       border-radius: var(--radius);

@@ -90,6 +90,10 @@ namespace server.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("WatchUrl")
+                        .HasMaxLength(1000)
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Year")
                         .HasColumnType("INTEGER");
 
@@ -110,9 +114,11 @@ namespace server.Migrations
                             CreatedAt = new DateTime(2026, 1, 1, 10, 0, 0, 0, DateTimeKind.Utc),
                             Duration = 169,
                             GenreId = 3,
+                            PosterUrl = "/uploads/interstellar.jpg",
                             Rating = 8.6999999999999993,
                             Title = "Интерстеллар",
                             UserId = 1,
+                            WatchUrl = "https://www.kinopoisk.ru/film/258687/",
                             Year = 2014
                         },
                         new
@@ -121,9 +127,11 @@ namespace server.Migrations
                             CreatedAt = new DateTime(2026, 1, 1, 11, 0, 0, 0, DateTimeKind.Utc),
                             Duration = 142,
                             GenreId = 1,
+                            PosterUrl = "/uploads/shawshank.jpg",
                             Rating = 9.3000000000000007,
                             Title = "Побег из Шоушенка",
                             UserId = 1,
+                            WatchUrl = "https://www.kinopoisk.ru/film/326/",
                             Year = 1994
                         },
                         new
@@ -132,9 +140,11 @@ namespace server.Migrations
                             CreatedAt = new DateTime(2026, 1, 1, 12, 0, 0, 0, DateTimeKind.Utc),
                             Duration = 152,
                             GenreId = 4,
+                            PosterUrl = "/uploads/dark_knight.jpg",
                             Rating = 9.0,
                             Title = "Темный рыцарь",
                             UserId = 1,
+                            WatchUrl = "https://www.kinopoisk.ru/film/111543/",
                             Year = 2008
                         },
                         new
@@ -143,9 +153,11 @@ namespace server.Migrations
                             CreatedAt = new DateTime(2026, 1, 1, 13, 0, 0, 0, DateTimeKind.Utc),
                             Duration = 112,
                             GenreId = 2,
+                            PosterUrl = "/uploads/intouchables.jpg",
                             Rating = 8.5,
                             Title = "1+1 (Неприкасаемые)",
                             UserId = 1,
+                            WatchUrl = "https://www.kinopoisk.ru/film/535341/",
                             Year = 2011
                         },
                         new
@@ -154,9 +166,11 @@ namespace server.Migrations
                             CreatedAt = new DateTime(2026, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc),
                             Duration = 148,
                             GenreId = 3,
+                            PosterUrl = "/uploads/inception.jpg",
                             Rating = 8.8000000000000007,
                             Title = "Начало",
                             UserId = 1,
+                            WatchUrl = "https://www.kinopoisk.ru/film/447301/",
                             Year = 2010
                         });
                 });

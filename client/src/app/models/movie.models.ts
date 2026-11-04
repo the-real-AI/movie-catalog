@@ -9,6 +9,7 @@ export interface Movie {
   userId: number;
   authorName: string;
   posterUrl: string | null;
+  watchUrl: string | null;
   createdAt: string;
 }
 
@@ -33,6 +34,8 @@ export interface CreateMovieDto {
   duration: number;
   rating: number;
   genreId: number;
+  posterUrl?: string | null;
+  watchUrl?: string | null;
 }
 
 export interface UpdateMovieDto {
@@ -41,6 +44,8 @@ export interface UpdateMovieDto {
   duration: number;
   rating: number;
   genreId: number;
+  posterUrl?: string | null;
+  watchUrl?: string | null;
 }
 
 export interface User {

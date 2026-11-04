@@ -117,7 +117,27 @@ import { environment } from '../../../environments/environment';
                   <span class="meta-label">Дата добавления:</span>
                   <span class="meta-value">{{ movie()!.createdAt | date:'dd.MM.yyyy HH:mm' }}</span>
                 </div>
+                @if (movie()!.watchUrl) {
+                  <div class="meta-item">
+                    <span class="meta-label">Ссылка на фильм:</span>
+                    <span class="meta-value">
+                      <a [href]="movie()!.watchUrl" target="_blank" rel="noopener noreferrer" class="link-watch">
+                        🔗 Открыть онлайн-кинотеатр
+                      </a>
+                    </span>
+                  </div>
+                }
               </div>
+
+              <!-- Кнопка смотреть онлайн -->
+              @if (movie()!.watchUrl) {
+                <div class="watch-banner">
+                  <a [href]="movie()!.watchUrl" target="_blank" rel="noopener noreferrer" class="btn btn-watch-large">
+                    <span class="play-icon">▶</span>
+                    <span>Смотреть фильм онлайн</span>
+                  </a>
+                </div>
+              }
 
               <!-- Кнопки действий: Видны только автору записи -->
               @if (isAuthor()) {
@@ -237,9 +257,36 @@ import { environment } from '../../../environments/environment';
       font-size: 1.05rem;
       font-weight: 500;
     }
-    .author-highlight {
-      color: #818cf8;
+    .link-watch {
+      color: #34d399;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+    .link-watch:hover {
+      color: #10b981;
+    }
+    .watch-banner {
+      margin-bottom: 2rem;
+    }
+    .btn-watch-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white !important;
+      font-size: 1.1rem;
       font-weight: 600;
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+      transition: all 0.2s;
+    }
+    .btn-watch-large:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+    }
+    .play-icon {
+      font-size: 1.25rem;
     }
     .author-actions {
       background-color: rgba(99, 102, 241, 0.08);

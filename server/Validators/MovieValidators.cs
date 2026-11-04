@@ -25,6 +25,11 @@ public class CreateMovieDtoValidator : AbstractValidator<CreateMovieDto>
 
         RuleFor(x => x.GenreId)
             .GreaterThan(0).WithMessage("Необходимо выбрать жанр из справочника.");
+
+        RuleFor(x => x.WatchUrl)
+            .Must(uri => string.IsNullOrEmpty(uri) || Uri.TryCreate(uri, UriKind.Absolute, out _))
+            .WithMessage("Ссылка на просмотр должна быть корректным URL (например, https://...).")
+            .MaximumLength(1000).WithMessage("Ссылка не должна превышать 1000 символов.");
     }
 }
 
@@ -49,6 +54,11 @@ public class UpdateMovieDtoValidator : AbstractValidator<UpdateMovieDto>
 
         RuleFor(x => x.GenreId)
             .GreaterThan(0).WithMessage("Необходимо выбрать жанр из справочника.");
+
+        RuleFor(x => x.WatchUrl)
+            .Must(uri => string.IsNullOrEmpty(uri) || Uri.TryCreate(uri, UriKind.Absolute, out _))
+            .WithMessage("Ссылка на просмотр должна быть корректным URL (например, https://...).")
+            .MaximumLength(1000).WithMessage("Ссылка не должна превышать 1000 символов.");
     }
 }
 

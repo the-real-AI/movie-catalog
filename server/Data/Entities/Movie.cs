@@ -8,6 +8,8 @@ public class Movie
     public int Duration { get; set; }
     public double Rating { get; set; }
     public string? PosterUrl { get; set; }
+    public string? WatchUrl { get; set; }
+
 
     public int GenreId { get; set; }
     public Genre Genre { get; set; } = null!;

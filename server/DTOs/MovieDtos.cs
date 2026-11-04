@@ -11,6 +11,7 @@ public record MovieDto(
     int UserId,
     string AuthorName,
     string? PosterUrl,
+    string? WatchUrl,
     DateTime CreatedAt
 );
 
@@ -25,6 +26,7 @@ public record MovieDetailDto(
     int UserId,
     string AuthorName,
     string? PosterUrl,
+    string? WatchUrl,
     DateTime CreatedAt
 );
 
@@ -33,7 +35,9 @@ public record CreateMovieDto(
     int Year,
     int Duration,
     double Rating,
-    int GenreId
+    int GenreId,
+    string? PosterUrl = null,
+    string? WatchUrl = null
 );
 
 public record UpdateMovieDto(
@@ -41,7 +45,9 @@ public record UpdateMovieDto(
     int Year,
     int Duration,
     double Rating,
-    int GenreId
+    int GenreId,
+    string? PosterUrl = null,
+    string? WatchUrl = null
 );
 
 public record PagedResult<T>(

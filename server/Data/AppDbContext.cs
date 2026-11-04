@@ -26,6 +26,7 @@ public class AppDbContext : DbContext
             entity.Property(m => m.Duration).IsRequired();
             entity.Property(m => m.Rating).IsRequired();
             entity.Property(m => m.PosterUrl).HasMaxLength(500);
+            entity.Property(m => m.WatchUrl).HasMaxLength(1000);
 
             entity.HasOne(m => m.Genre)
                   .WithMany(g => g.Movies)
@@ -89,7 +90,8 @@ public class AppDbContext : DbContext
                 Rating = 8.7,
                 GenreId = 3, // Фантастика
                 UserId = 1,
-                PosterUrl = null,
+                PosterUrl = "/uploads/interstellar.jpg",
+                WatchUrl = "https://www.kinopoisk.ru/film/258687/",
                 CreatedAt = new DateTime(2026, 1, 1, 10, 0, 0, DateTimeKind.Utc)
             },
             new Movie
@@ -101,7 +103,8 @@ public class AppDbContext : DbContext
                 Rating = 9.3,
                 GenreId = 1, // Драма
                 UserId = 1,
-                PosterUrl = null,
+                PosterUrl = "/uploads/shawshank.jpg",
+                WatchUrl = "https://www.kinopoisk.ru/film/326/",
                 CreatedAt = new DateTime(2026, 1, 1, 11, 0, 0, DateTimeKind.Utc)
             },
             new Movie
@@ -113,7 +116,8 @@ public class AppDbContext : DbContext
                 Rating = 9.0,
                 GenreId = 4, // Боевик
                 UserId = 1,
-                PosterUrl = null,
+                PosterUrl = "/uploads/dark_knight.jpg",
+                WatchUrl = "https://www.kinopoisk.ru/film/111543/",
                 CreatedAt = new DateTime(2026, 1, 1, 12, 0, 0, DateTimeKind.Utc)
             },
             new Movie
@@ -125,7 +129,8 @@ public class AppDbContext : DbContext
                 Rating = 8.5,
                 GenreId = 2, // Комедия
                 UserId = 1,
-                PosterUrl = null,
+                PosterUrl = "/uploads/intouchables.jpg",
+                WatchUrl = "https://www.kinopoisk.ru/film/535341/",
                 CreatedAt = new DateTime(2026, 1, 1, 13, 0, 0, DateTimeKind.Utc)
             },
             new Movie
@@ -137,7 +142,8 @@ public class AppDbContext : DbContext
                 Rating = 8.8,
                 GenreId = 3, // Фантастика
                 UserId = 1,
-                PosterUrl = null,
+                PosterUrl = "/uploads/inception.jpg",
+                WatchUrl = "https://www.kinopoisk.ru/film/447301/",
                 CreatedAt = new DateTime(2026, 1, 1, 14, 0, 0, DateTimeKind.Utc)
             }
         );

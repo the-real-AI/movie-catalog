@@ -134,6 +134,26 @@ import { CreateMovieDto, Genre, UpdateMovieDto } from '../../models/movie.models
             </div>
           </div>
 
+          <!-- Ссылка на просмотр фильма -->
+          <div class="form-group">
+            <label class="form-label" for="watchUrl">Ссылка на просмотр фильма (онлайн-кинотеатр)</label>
+            <input
+              id="watchUrl"
+              type="url"
+              class="form-control"
+              placeholder="Например: https://www.kinopoisk.ru/film/..."
+              formControlName="watchUrl"
+              [class.is-invalid]="isFieldInvalid('watchUrl') || serverErrors()['WatchUrl']"
+            />
+            <span class="hint-text">Опционально: ссылка на Кинопоиск, Иви или другой плеер</span>
+            @if (isFieldInvalid('watchUrl')) {
+              <p class="field-error">Ссылка должна начинаться с http:// или https://.</p>
+            }
+            @if (serverErrors()['WatchUrl']) {
+              <p class="field-error">{{ serverErrors()['WatchUrl'][0] }}</p>
+            }
+          </div>
+
           <!-- Кнопки отправки -->
           <div class="form-actions">
             <button
@@ -187,6 +207,12 @@ import { CreateMovieDto, Genre, UpdateMovieDto } from '../../models/movie.models
     .is-invalid {
       border-color: var(--danger) !important;
     }
+    .hint-text {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
     .alert-box {
       padding: 1rem 1.25rem;
       border-radius: 8px;
@@ -221,7 +247,8 @@ export class MovieFormComponent implements OnInit {
     year: [new Date().getFullYear(), [Validators.required, Validators.min(1895), Validators.max(this.maxYear)]],
     duration: [120, [Validators.required, Validators.min(1), Validators.max(1000)]],
     rating: [8.0, [Validators.required, Validators.min(0), Validators.max(10)]],
-    genreId: [null, [Validators.required, Validators.min(1)]]
+    genreId: [null, [Validators.required, Validators.min(1)]],
+    watchUrl: ['', [Validators.pattern('^https?://.*')]]
   });
 
   ngOnInit(): void {
@@ -251,7 +278,8 @@ export class MovieFormComponent implements OnInit {
             year: movie.year,
             duration: movie.duration,
             rating: movie.rating,
-            genreId: movie.genreId
+            genreId: movie.genreId,
+            watchUrl: movie.watchUrl || ''
           });
           clearInterval(checkInterval);
         }
@@ -282,7 +310,8 @@ export class MovieFormComponent implements OnInit {
         year: Number(formVal.year),
         duration: Number(formVal.duration),
         rating: Number(formVal.rating),
-        genreId: Number(formVal.genreId)
+        genreId: Number(formVal.genreId),
+        watchUrl: formVal.watchUrl ? formVal.watchUrl.trim() : null
       };
 
       this.movieService.updateMovie(this.movieId()!, dto).subscribe({
@@ -301,7 +330,8 @@ export class MovieFormComponent implements OnInit {
         year: Number(formVal.year),
         duration: Number(formVal.duration),
         rating: Number(formVal.rating),
-        genreId: Number(formVal.genreId)
+        genreId: Number(formVal.genreId),
+        watchUrl: formVal.watchUrl ? formVal.watchUrl.trim() : null
       };
 
       this.movieService.createMovie(dto).subscribe({
