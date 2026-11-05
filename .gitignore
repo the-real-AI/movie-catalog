@@ -24,6 +24,11 @@ yarn-error.log*
 ## Uploaded Files
 server/wwwroot/uploads/*
 !server/wwwroot/uploads/.gitkeep
+!server/wwwroot/uploads/interstellar.jpg
+!server/wwwroot/uploads/shawshank.jpg
+!server/wwwroot/uploads/dark_knight.jpg
+!server/wwwroot/uploads/intouchables.jpg
+!server/wwwroot/uploads/inception.jpg
 
 ## OS & Editors
 .vscode/

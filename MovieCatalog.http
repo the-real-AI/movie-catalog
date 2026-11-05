@@ -118,7 +118,7 @@ Content-Type: multipart/form-data; boundary=WebAppBoundary
 Content-Disposition: form-data; name="file"; filename="poster.png"
 Content-Type: image/png
 
-< C:/Users/ibrag/.gemini/antigravity/scratch/movie-catalog/test_poster.png
+< ./test_poster.png
 --WebAppBoundary--
 
 ### 16. Удаление фильма автором (204 No Content)

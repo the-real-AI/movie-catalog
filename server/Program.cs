@@ -83,6 +83,9 @@ app.MapScalarApiReference(options =>
            .WithTheme(ScalarTheme.Moon);
 });
 
+// Root redirect to Scalar API documentation
+app.MapGet("/", () => Results.Redirect("/scalar/v1"));
+
 app.UseAuthentication();
 app.UseAuthorization();
 
