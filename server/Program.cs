@@ -94,10 +94,13 @@ app.MapAuthEndpoints();
 app.MapGenreEndpoints();
 app.MapMovieEndpoints();
 
-// Ensure seed admin user has valid BCrypt hash for "Admin123!"
+// Apply checked-in EF Core migrations so a fresh Codespace creates its SQLite database.
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await db.Database.MigrateAsync();
+
+    // Ensure seed admin user has valid BCrypt hash for "Admin123!"
     var admin = await db.Users.FirstOrDefaultAsync(u => u.Username == "admin");
     if (admin != null && !BCrypt.Net.BCrypt.Verify("Admin123!", admin.PasswordHash))
     {

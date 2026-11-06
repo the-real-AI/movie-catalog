@@ -1,3 +1,4 @@
 export const environment = {
-  apiUrl: 'http://localhost:5000'
+  // Use same-origin requests; Angular's dev-server proxy forwards API and poster requests.
+  apiUrl: ''
 };
