@@ -17,8 +17,11 @@ public class JwtTokenService
 
     public string GenerateToken(User user)
     {
+        // Keep token generation aligned with the JWT validation settings in Program.cs.
+        // The configured key is preferred; this development fallback lets a fresh
+        // Codespace run without requiring per-user dotnet secrets.
         var key = _configuration["Jwt:Key"]
-            ?? throw new InvalidOperationException("Jwt:Key is not configured in user-secrets.");
+            ?? "MovieCatalogSecretSigningKey_2026_Minimum32CharsLong!";
         var issuer = _configuration["Jwt:Issuer"] ?? "MovieCatalogServer";
         var audience = _configuration["Jwt:Audience"] ?? "MovieCatalogClient";
 
